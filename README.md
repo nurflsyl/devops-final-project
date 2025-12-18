@@ -10,5 +10,9 @@ Lifecycle: Linux VM → Git → Docker → Jenkins → Kubernetes → Ansible
 - scripts/ - automation scripts
 - logs/    - generated logs (not committed)
 
+
 ## Notes (main)
 This line comes from main branch.
+
+## Notes (develop)
+This line comes from develop branch.
