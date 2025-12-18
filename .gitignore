@@ -23,3 +23,6 @@ node_modules/
 
 # OS
 .DS_Store
+
+# Docker env
+/docker/.env
