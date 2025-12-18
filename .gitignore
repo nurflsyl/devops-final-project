@@ -8,11 +8,11 @@ target/
 logs/
 *.log
 
-# Env / secrets
+# Env / secrets (REAL secrets only)
 .env
 .env.*
-*.pem
-*.key
+!*.env.example
+!docker/.env.example
 
 # Node
 node_modules/
@@ -23,6 +23,3 @@ node_modules/
 
 # OS
 .DS_Store
-
-# Docker env
-/docker/.env
