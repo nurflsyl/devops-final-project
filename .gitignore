@@ -1,0 +1,25 @@
+# Build outputs
+build/
+out/
+target/
+.gradle/
+
+# Logs
+logs/
+*.log
+
+# Env / secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Node
+node_modules/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
