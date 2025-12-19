@@ -1,0 +1,59 @@
+- name: Deploy application to Kubernetes (minikube)
+  hosts: local
+  become: false
+  vars:
+    k8s_dir: "/opt/devops-project/k8s"
+
+  tasks:
+    - name: Check kubectl access
+      command: kubectl get nodes
+      register: nodes_out
+      changed_when: false
+
+    - name: Apply ConfigMap
+      command: kubectl apply -f {{ k8s_dir }}/configmap_NurasylMaratkanuly.yaml
+      register: cm_out
+      changed_when: "'configured' in cm_out.stdout or 'created' in cm_out.stdout"
+
+    - name: Apply Secret
+      command: kubectl apply -f {{ k8s_dir }}/secret_NurasylMaratkanuly.yaml
+      register: sec_out
+      changed_when: "'configured' in sec_out.stdout or 'created' in sec_out.stdout"
+
+    - name: Apply Postgres Service
+      command: kubectl apply -f {{ k8s_dir }}/postgres_service_NurasylMaratkanuly.yaml
+      register: pgs_out
+      changed_when: "'configured' in pgs_out.stdout or 'created' in pgs_out.stdout"
+
+    - name: Apply Postgres Deployment
+      command: kubectl apply -f {{ k8s_dir }}/postgres_deployment_NurasylMaratkanuly.yaml
+      register: pgd_out
+      changed_when: "'configured' in pgd_out.stdout or 'created' in pgd_out.stdout"
+
+    - name: Apply App Deployment
+      command: kubectl apply -f {{ k8s_dir }}/deployment_NurasylMaratkanuly.yaml
+      register: appd_out
+      changed_when: "'configured' in appd_out.stdout or 'created' in appd_out.stdout"
+
+    - name: Apply App Service
+      command: kubectl apply -f {{ k8s_dir }}/service_NurasylMaratkanuly.yaml
+      register: apps_out
+      changed_when: "'configured' in apps_out.stdout or 'created' in apps_out.stdout"
+
+    - name: Apply HPA
+      command: kubectl apply -f {{ k8s_dir }}/hpa_NurasylMaratkanuly.yaml
+      register: hpa_out
+      changed_when: "'configured' in hpa_out.stdout or 'created' in hpa_out.stdout"
+
+    - name: Wait for todo-app rollout
+      command: kubectl rollout status deployment/todo-app --timeout=120s
+      changed_when: false
+
+    - name: Show pods
+      command: kubectl get pods -o wide
+      register: pods_out
+      changed_when: false
+
+    - name: Print pods
+      debug:
+        var: pods_out.stdout_lines

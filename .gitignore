@@ -23,3 +23,15 @@ node_modules/
 
 # OS
 .DS_Store
+
+# Docker env file (should NOT be committed)
+docker/.env
+
+# Ansible Vault (never commit vault password or encrypted vault files)
+ansible/.vault_pass_*
+.vault_pass_*
+ansible/group_vars/all/vault*.yml
+ansible/group_vars/all/vault.yml
+
+# Local tools/downloads (keep repo clean)
+tools/
