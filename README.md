@@ -80,9 +80,10 @@ All Kubernetes components are running correctly:
 - Services are correctly exposed using ClusterIP and NodePort.
 
 Example commands:
-```bash
+
 kubectl get pods -o wide
 kubectl get svc
+
 ---
 
 ## Environment Separation
