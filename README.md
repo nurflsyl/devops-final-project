@@ -83,3 +83,22 @@ Example commands:
 ```bash
 kubectl get pods -o wide
 kubectl get svc
+---
+
+## Environment Separation
+
+The application is deployed into separate Kubernetes namespaces (`dev` and `prod`) to isolate environments and reduce deployment risks.
+
+---
+
+## Production Risks and Possible Improvements
+
+**Risks:**
+- Single-node Kubernetes cluster (Minikube) is not suitable for real production.
+- No external secrets manager is used.
+- Limited monitoring and alerting.
+
+**Possible Improvements:**
+- Use managed Kubernetes (EKS/GKE/AKS).
+- Integrate centralized logging and monitoring (Prometheus, Grafana).
+- Add automated security scanning and backups.
